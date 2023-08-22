@@ -3,13 +3,9 @@ import "./Playground.css";
 import GridItem from "../models/GridItem";
 import SnakeBlock from "../models/SnakeBlock";
 import FoodItem from "../models/FoodItem";
-
-enum MovementDirection {
-  LEFT = "left",
-  RIGHT = "right",
-  UP = "up",
-  DOWN = "down",
-}
+import { MovementDirection } from "../gameData/MovementDirection";
+import { FoodData } from "../gameData/FoodData";
+import { SnakeInitialData } from "../gameData/SnakeData";
 
 const Playground = () => {
   const height = 500;
@@ -23,30 +19,8 @@ const Playground = () => {
     MovementDirection.RIGHT
   );
   const [score, setScore] = useState(0);
-
-  //song
-  // Replace with the actual path
-
   //food State
-  const [foods, setFood] = useState<Array<FoodItem>>([
-    {
-      type: "apple",
-      index: 0,
-      position: {
-        xIndex: Math.floor(Math.random() * 24),
-        yIndex: Math.floor(Math.random() * 24),
-      },
-    },
-    {
-      type: "berry",
-      index: 1,
-      position: {
-        xIndex: Math.floor(Math.random() * 24),
-        yIndex: Math.floor(Math.random() * 24),
-      },
-    },
-  ]);
-
+  const [foods, setFood] = useState<Array<FoodItem>>(FoodData);
   // Snakes
   const [snakes, setSnakes] = useState<Array<SnakeBlock>>([]);
 
@@ -153,50 +127,7 @@ const Playground = () => {
     setGridItems([]);
 
     if (snakes.length === 0) {
-      setSnakes([
-        {
-          index: 0,
-          position: {
-            xIndex: 5,
-            yIndex: 0,
-          },
-        },
-        {
-          index: 1,
-          position: {
-            xIndex: 4,
-            yIndex: 0,
-          },
-        },
-        {
-          index: 2,
-          position: {
-            xIndex: 3,
-            yIndex: 0,
-          },
-        },
-        {
-          index: 3,
-          position: {
-            xIndex: 2,
-            yIndex: 0,
-          },
-        },
-        {
-          index: 4,
-          position: {
-            xIndex: 1,
-            yIndex: 0,
-          },
-        },
-        {
-          index: 5,
-          position: {
-            xIndex: 0,
-            yIndex: 0,
-          },
-        },
-      ]);
+      setSnakes(SnakeInitialData);
     }
 
     // Generate Grid
@@ -290,7 +221,10 @@ const Playground = () => {
                 position: "absolute",
                 borderRadius: "5px",
 
-                background: `repeating-linear-gradient(
+                background:
+                  snake.index === 0
+                    ? "black"
+                    : `repeating-linear-gradient(
                   to right,
                   #f6ba52,
                   #f6ba52 10px,
@@ -316,9 +250,7 @@ const Playground = () => {
                 position: "absolute",
                 borderRadius: "10px",
               }}
-            >
-              {" "}
-            </div>
+            ></div>
           ))}
         </div>
 
