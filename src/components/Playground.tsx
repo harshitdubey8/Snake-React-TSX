@@ -64,7 +64,7 @@ const Playground = () => {
         xIndex: item.position.xIndex,
         yIndex: item.position.yIndex,
       };
-      if (item.index != 0) {
+      if (item.index !== 0) {
         item.position = previousLocation;
       }
 
@@ -72,7 +72,7 @@ const Playground = () => {
       previousLocation = savedLocation;
 
       // Move First Item
-      if (item.index == 0) {
+      if (item.index === 0) {
         switch (movementDirection) {
           case MovementDirection.RIGHT:
             item.position.xIndex++;
@@ -133,16 +133,16 @@ const Playground = () => {
   };
 
   const movementHandler = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key == "s") {
+    if (event.key === "s") {
       if (movementDirection === MovementDirection.UP) return;
       setMovementDirection(MovementDirection.DOWN);
-    } else if (event.key == "d") {
+    } else if (event.key === "d") {
       if (movementDirection === MovementDirection.LEFT) return;
       setMovementDirection(MovementDirection.RIGHT);
-    } else if (event.key == "a") {
+    } else if (event.key === "a") {
       if (movementDirection === MovementDirection.RIGHT) return;
       setMovementDirection(MovementDirection.LEFT);
-    } else if (event.key == "w") {
+    } else if (event.key === "w") {
       if (movementDirection === MovementDirection.DOWN) return;
       setMovementDirection(MovementDirection.UP);
     }
@@ -263,7 +263,7 @@ const Playground = () => {
 
     // Clear Loops
     return () => clearInterval(gameplayLoop);
-  }, [movementDirection, startGame, foods, snakes]);
+  }, [movementDirection, startGame, foods, snakes, score]);
 
   return (
     <div className="playgroundWrapper">
