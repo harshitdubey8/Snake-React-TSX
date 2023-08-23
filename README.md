@@ -2,7 +2,7 @@
 
 https://enchanting-melomakarona-d8f2c0.netlify.app 
 
-# Basic controls 
+# Basic controls / Instructions
 
 * Click on the play area - To start the game 
 * Use W,A, S,D to control the snake 
