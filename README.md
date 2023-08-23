@@ -1,6 +1,19 @@
+# The link to this application 
+
+https://enchanting-melomakarona-d8f2c0.netlify.app 
+
+# Basic controls / Instructions
+
+* Click on the play area - To start the game 
+* Use W,A, S,D to control the snake 
+* Apple has 1 Point and will increase the snake length by +1 
+* Berry will provide 2 points and deduct the snake's length by -1.
+* The snake will die if it touches the walls and gets hit by himself 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
