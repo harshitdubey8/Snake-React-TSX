@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
+//css
 import "./Playground.css";
+
+//models
 import GridItem from "../models/GridItem";
 import SnakeBlock from "../models/SnakeBlock";
 import FoodItem from "../models/FoodItem";
+//data
 import { MovementDirection } from "../gameData/MovementDirection";
 import { FoodData } from "../gameData/FoodData";
 import { SnakeInitialData } from "../gameData/SnakeData";
+import GameOverModal from "./GameOverModal";
 
 const Playground = () => {
   const height = 500;
@@ -19,6 +24,7 @@ const Playground = () => {
     MovementDirection.RIGHT
   );
   const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
   //food State
   const [foods, setFood] = useState<Array<FoodItem>>(FoodData);
   // Snakes
@@ -72,6 +78,7 @@ const Playground = () => {
       ) {
         //  clearInterval(gameplayLoop);
         setStartGame(false);
+        setGameOver(true);
       }
       snakesCurrentValues.push(item);
     });
@@ -102,6 +109,7 @@ const Playground = () => {
         item.position.yIndex === snakes[0].position.yIndex
       ) {
         setStartGame(false);
+        setGameOver(true);
       }
     });
   };
@@ -198,6 +206,7 @@ const Playground = () => {
 
   return (
     <div className="playgroundWrapper">
+      {gameOver && <GameOverModal score={score} />}
       <div className="scoreBoard">Score : {score}</div>
       <div
         className="playgroundContainer"
@@ -221,18 +230,36 @@ const Playground = () => {
                 position: "absolute",
                 borderRadius: "5px",
 
-                background:
-                  snake.index === 0
-                    ? "black"
-                    : `repeating-linear-gradient(
-                  to right,
-                  #f6ba52,
-                  #f6ba52 10px,
-                  #ffd180 10px,
-                  #ffd180 20px
-                )`,
+                // background:
+                //   snake.index === 0
+                //     ? "black"
+                //     : `repeating-linear-gradient(
+                //   to right,
+                //   #f6ba52,
+                //   #f6ba52 10px,
+                //   #ffd180 10px,
+                //   #ffd180 20px
+                // )`,
               }}
-            ></div>
+            >
+              {snake.index !== 0 ? (
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src="https://cdn.discordapp.com/attachments/1058503973222486016/1143472755887575120/tail.png"
+                  alt="body"
+                />
+              ) : (
+                <img
+                  style={{
+                    width: "fit-content",
+                    height: "100%",
+                    position: "sticky",
+                  }}
+                  src="https://cdn.discordapp.com/attachments/1058503973222486016/1143474480946106378/head.png"
+                  alt="head"
+                />
+              )}
+            </div>
           ))}
         </div>
         {/* food */}
@@ -246,11 +273,25 @@ const Playground = () => {
                 left: fooditem.position.xIndex * gridItemSize,
                 width: gridItemSize,
                 height: gridItemSize,
-                background: fooditem.type === "apple" ? "#DF2E38" : "#0C356A",
+
                 position: "absolute",
                 borderRadius: "10px",
               }}
-            ></div>
+            >
+              {fooditem.type === "apple" ? (
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src="https://static.vecteezy.com/system/resources/previews/009/597/291/original/apple-fruit-illustration-cartoon-png.png"
+                  alt="apple"
+                />
+              ) : (
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src="https://cdn-icons-png.flaticon.com/256/1515/1515043.png"
+                  alt="berry"
+                />
+              )}
+            </div>
           ))}
         </div>
 
