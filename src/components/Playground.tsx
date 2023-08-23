@@ -202,6 +202,7 @@ const Playground = () => {
 
     // Clear Loops
     return () => clearInterval(gameplayLoop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movementDirection, startGame, foods, snakes, score]);
 
   return (
